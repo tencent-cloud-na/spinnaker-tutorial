@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    spinnaker: spinnaker-halyard
+  name: halyardtest
+  namespace: spinnaker
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8084
+    protocol: TCP
+    targetPort: 8084
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    spinnaker: spinnaker-halyard
+  sessionAffinity: None
+  type: ClusterIP

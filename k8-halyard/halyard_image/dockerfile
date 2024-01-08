@@ -1,0 +1,19 @@
+FROM alpine:latest as openjdk17
+
+# Add the edge repository to get OpenJDK 17
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
+# Install OpenJDK 17
+RUN apk update && \
+    apk add --no-cache openjdk17
+
+FROM us-docker.pkg.dev/spinnaker-community/docker/halyard:stable
+
+USER root
+
+COPY --from=openjdk17 /usr/lib/jvm/java-17-openjdk /usr/lib/jvm/java-17-openjdk
+
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk
+ENV PATH $PATH:$JAVA_HOME/bin
+
+USER spinnaker

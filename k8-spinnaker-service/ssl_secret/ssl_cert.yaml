@@ -1,0 +1,8 @@
+apiVersion: v1
+stringData:
+  qcloud_cert_id: ${ssl-cert-id} #ssl cert id
+kind: Secret
+metadata:
+  name: ${ssl-cert-name} # secret name
+  namespace: default
+type: Opaque

@@ -1,0 +1,19 @@
+apiVersion: cloud.tencent.com/v1alpha1
+kind: TkeServiceConfig
+metadata:
+  name: spin-ingress-config
+  namespace: spinnaker
+spec:
+  loadBalancer:
+    l7Listeners:
+    - protocol: HTTPS
+      port: 443
+      domains:
+      - domain: "*****"
+        rules:
+        - url: "/"
+          forwardType: HTTPS
+      - domain: "*****"
+        rules:
+        - url: "/"
+          forwardType: HTTP
